@@ -5,8 +5,17 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.month {
+.calendar {
   width: 280px;
+  margin: 2rem 0;
+}
+
+.title {
+  text-align: center;
+}
+
+.day-titles {
+  display: flex;
 }
 
 .week {

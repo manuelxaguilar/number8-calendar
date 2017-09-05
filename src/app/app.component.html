@@ -14,12 +14,24 @@
   <button type="submit">Fetch calendar</button>
 </form>
 
-<section *ngFor="let month of months">
-  <header>
-    <h2>{{ month.month + ' ' + month.year }}</h2>
-  </header>
+<div *ngIf="error">There was an error with your request</div>
+
+<section *ngFor="let cal of calendar"
+  class="calendar">
   <ul class="month">
-    <li *ngFor="let week of month.weeks"
+    <li class="day-titles">
+      <span class="day">S</span>
+      <span class="day">M</span>
+      <span class="day">T</span>
+      <span class="day">W</span>
+      <span class="day">T</span>
+      <span class="day">F</span>
+      <span class="day">S</span>
+    </li>
+    <li class="title">
+      <h4>{{ cal.month + ' ' + cal.year }}</h4>
+    </li>
+    <li *ngFor="let week of cal.weeks"
       class="week">
       <div *ngFor="let day of week; let i = index"
         class="day">
