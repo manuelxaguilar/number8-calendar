@@ -52,6 +52,9 @@ export class AppComponent implements OnInit {
     this.setCalendar(this.startingDate, this.endingDate);
 
     // Didn't really get around to working on this
+    // though i am logging the results if successful
+    // or showing an ugly error message on the html if
+    // it fails
     this.http.get(`${this.API_URL}?key=${this.API_KEY}&country=${this.countryCode}&year=${this.HOLIDAYS_YEAR}`)
     .map(res => res.json())
     .subscribe(
