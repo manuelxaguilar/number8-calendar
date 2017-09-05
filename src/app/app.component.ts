@@ -14,6 +14,10 @@ export class AppComponent implements OnInit {
   public startingDate: string = '';
   public endingDate;
   public countryCode: string = ''
+  firstMonth: boolean = true;
+  months: Array<any> = [];
+  weekIdx: number = 0;
+
 
   constructor(
     private fb:FormBuilder,
@@ -37,9 +41,46 @@ export class AppComponent implements OnInit {
       this.endingDate = moment(this.startingDate).add(this.form.controls.days.value, 'd').format();
       this.countryCode = this.form.controls.code.value;
     }
-    console.log('this.startingDate', this.startingDate);
-    console.log('this.endingDate', this.endingDate);
-    console.log('this.countryCode', this.countryCode);
+
+    this.getDates(this.startingDate, this.endingDate);
+  }
+
+  getDates(startDate, stopDate) {
+    var currentDate = moment(startDate);
+    var stopDate = moment(stopDate);
+    let i = 0;
+
+    while (currentDate <= stopDate) {
+      if (this.firstMonth) {
+        this.months.push({
+          month: moment(currentDate).format('MMMM'),
+          weeks: [],
+          year: currentDate.year()
+        });
+        this.months[this.months.length - 1].weeks.push([]);
+        this.firstMonth = false;
+      }
+
+      if (currentDate.date() === 1) {
+        this.months.push({
+          month: moment(currentDate).format('MMMM'),
+          weeks: [],
+          year: currentDate.year()
+        });
+        this.months[this.months.length - 1].weeks.push([])
+        this.weekIdx = 0;
+      }
+
+      if (!currentDate.day() && currentDate.date() !== 1) {
+        this.weekIdx++;
+        this.months[this.months.length - 1].weeks.push([])
+      }
+
+      this.months[this.months.length - 1].weeks[this.weekIdx][currentDate.day()] = currentDate.date();
+      currentDate = currentDate.add(1, 'days');
+      i++;
+    }
+    console.log('months', this.months);
   }
 
 
