@@ -52,28 +52,21 @@ export class AppComponent implements OnInit {
 
     while (currentDate <= stopDate) {
       if (this.firstMonth) {
-        this.months.push({
-          month: moment(currentDate).format('MMMM'),
-          weeks: [],
-          year: currentDate.year()
-        });
-        this.months[this.months.length - 1].weeks.push([]);
+        this.setMonth(currentDate);
+        this.setWeek();
+        this.setWeek();
         this.firstMonth = false;
       }
 
       if (currentDate.date() === 1) {
-        this.months.push({
-          month: moment(currentDate).format('MMMM'),
-          weeks: [],
-          year: currentDate.year()
-        });
-        this.months[this.months.length - 1].weeks.push([])
+        this.setMonth(currentDate);
+        this.setWeek();
         this.weekIdx = 0;
       }
 
       if (!currentDate.day() && currentDate.date() !== 1) {
         this.weekIdx++;
-        this.months[this.months.length - 1].weeks.push([])
+        this.setWeek();
       }
 
       this.months[this.months.length - 1].weeks[this.weekIdx][currentDate.day()] = currentDate.date();
@@ -83,5 +76,16 @@ export class AppComponent implements OnInit {
     console.log('months', this.months);
   }
 
+  setMonth(currentDate) {
+    this.months.push({
+      month: moment(currentDate).format('MMMM'),
+      weeks: [],
+      year: currentDate.year()
+    });
+  }
+
+  setWeek() {
+    this.months[this.months.length - 1].weeks.push([]);
+  }
 
 }
