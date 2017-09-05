@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
 
     while (currentDate <= stopDate) {
       if (currentDate.date() === 1) {
+        this.checkEndOfMonth();
         this.setMonth(currentDate);
         this.setWeek();
         this.weekIdx = 0;
@@ -84,6 +85,14 @@ export class AppComponent implements OnInit {
 
   setWeek() {
     this.months[this.months.length - 1].weeks.push([]);
+  }
+
+  checkEndOfMonth() {
+    const lastWeek = this.months[this.months.length - 1].weeks[this.weekIdx];
+    const lastWeeksLength = lastWeek.length;
+    for (let i = lastWeeksLength; i < 7; i++) {
+      this.months[this.months.length - 1].weeks[this.weekIdx][i] = undefined;
+    }
   }
 
 }
