@@ -13,3 +13,24 @@
     formControlName="code">
   <button type="submit">Fetch calendar</button>
 </form>
+
+<section *ngFor="let month of months">
+  <header>
+    <h2>{{ month.month + ' ' + month.year }}</h2>
+  </header>
+  <ul>
+    <li *ngFor="let week of month.weeks">
+      <div *ngFor="let day of week; let i = index">
+        <span *ngIf="!day">
+          0
+        </span>
+        <span *ngIf="day && (i === 0 || i === 6)">
+          {{ day }}
+        </span>
+        <span *ngIf="day && (i !== 0 && i !== 6)">
+          {{ day }}
+        </span>
+      </div>
+    </li>
+  </ul>
+</section>
