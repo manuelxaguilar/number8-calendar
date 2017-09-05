@@ -9,14 +9,12 @@ import moment from 'moment/src/moment'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
   public form: FormGroup;
   public startingDate: string = '';
   public endingDate;
   public countryCode: string = ''
-  firstMonth: boolean = true;
-  months: Array<any> = [];
-  weekIdx: number = 0;
+  public months: Array<any> = [];
+  public weekIdx: number = 0;
 
 
   constructor(
@@ -50,14 +48,9 @@ export class AppComponent implements OnInit {
     var stopDate = moment(stopDate);
     let i = 0;
 
-    while (currentDate <= stopDate) {
-      if (this.firstMonth) {
-        this.setMonth(currentDate);
-        this.setWeek();
-        this.setWeek();
-        this.firstMonth = false;
-      }
+    this.setInitialValues(currentDate);
 
+    while (currentDate <= stopDate) {
       if (currentDate.date() === 1) {
         this.setMonth(currentDate);
         this.setWeek();
@@ -74,6 +67,11 @@ export class AppComponent implements OnInit {
       i++;
     }
     console.log('months', this.months);
+  }
+
+  setInitialValues(currentDate) {
+    this.setMonth(currentDate);
+    this.setWeek();
   }
 
   setMonth(currentDate) {
