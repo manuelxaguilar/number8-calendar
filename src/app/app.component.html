@@ -18,16 +18,21 @@
   <header>
     <h2>{{ month.month + ' ' + month.year }}</h2>
   </header>
-  <ul>
-    <li *ngFor="let week of month.weeks">
-      <div *ngFor="let day of week; let i = index">
-        <span *ngIf="!day">
-          0
+  <ul class="month">
+    <li *ngFor="let week of month.weeks"
+      class="week">
+      <div *ngFor="let day of week; let i = index"
+        class="day">
+        <span *ngIf="!day"
+          class="day--date invalid">
+          <span class="hidden">0</span>
         </span>
-        <span *ngIf="day && (i === 0 || i === 6)">
+        <span *ngIf="day && (i === 0 || i === 6)"
+          class="day--date weekends">
           {{ day }}
         </span>
-        <span *ngIf="day && (i !== 0 && i !== 6)">
+        <span *ngIf="day && (i !== 0 && i !== 6)"
+          class="day--date weekdays">
           {{ day }}
         </span>
       </div>

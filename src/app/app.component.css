@@ -1,0 +1,45 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.month {
+  width: 280px;
+}
+
+.week {
+  display: flex;
+  list-style-type: none;
+}
+
+.day {
+  flex: 1 1 0;
+  text-align: center;
+  margin: 1px;
+}
+
+.day--date {
+  display: block;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.invalid {
+  background-color: #cbcbcb;
+}
+
+.weekdays {
+  background-color: #c5d997;
+  color: #5d6c5f;
+}
+
+.weekends {
+  background-color: #fef938;
+  color: #5f511c;
+}
+
+.hidden {
+  visibility: hidden;
+}
