@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
   onSubmit() {
     if (this.form.valid) {
       this.startingDate = this.form.controls.date.value;
-      this.endingDate = moment(this.startingDate).add(this.form.controls.days.value, 'd');
+      this.endingDate = moment(this.startingDate).add(this.form.controls.days.value, 'd').format();
       this.countryCode = this.form.controls.code.value;
     }
     console.log('this.startingDate', this.startingDate);
