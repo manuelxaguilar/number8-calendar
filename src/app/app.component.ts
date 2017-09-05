@@ -18,9 +18,15 @@ export class AppComponent implements OnInit {
   public countryCode: string = ''
   public calendar: Array<any> = [];
   public weekIdx: number = 0;
+  private HOLIDAYS_YEAR = 2008;
+  private API_URL = 'https://holidayapi.com/v1/holidays';
+  private API_KEY = '42b54d8f-2832-453e-baf4-c4b2b530bca5';
+  public holidays = [];
+  public error = false;
 
   constructor(
-    private fb:FormBuilder
+    private fb:FormBuilder,
+    private http: Http
   ) {}
 
   ngOnInit() {
@@ -44,6 +50,17 @@ export class AppComponent implements OnInit {
     }
 
     this.setCalendar(this.startingDate, this.endingDate);
+
+    // Didn't really get around to working on this
+    this.http.get(`${this.API_URL}?key=${this.API_KEY}&country=${this.countryCode}&year=${this.HOLIDAYS_YEAR}`)
+    .map(res => res.json())
+    .subscribe(
+      ({ holidays }) => {
+        console.log('holdidays:', holidays);
+        this.holidays = holidays
+      },
+      error => this.error = true
+    );
   }
 
   wipeCalendar() {
